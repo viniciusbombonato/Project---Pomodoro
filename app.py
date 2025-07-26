@@ -1,7 +1,7 @@
-from Flask import Flask
+from flask import Flask
 
 app = Flask("__name__")
 
 @app.route("/")
 def homepage():
-    return("home.html")
+    return render_template("layout.html")

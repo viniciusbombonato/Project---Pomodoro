@@ -5,7 +5,23 @@
 {% endblock %}
 
 {% block navbar %}
+
+{% endblock %}
+{% block content %}
 <body>
-    <h1>Hi!</h1>
+    <h1>Pomodoro</h1>
+    <div class="centered-div">
+        <form method="post">
+            <div class="input-group mb-3">
+                <input class="form-group"name="minutes" type="number" value="25">
+            </div>
+            <div class="input-group mb-3">
+                <input name="break" type="number" value="10">
+            </div>
+            <div>
+                <input class="btn btn-primary" type="submit" value="Start">
+            </div>
+        </form>
+    </div>
 </body>
 {% endblock %}

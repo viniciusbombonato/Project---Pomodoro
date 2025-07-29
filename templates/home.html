@@ -4,24 +4,21 @@
     Homepage
 {% endblock %}
 
-{% block navbar %}
-
-{% endblock %}
 {% block content %}
-<body>
-    <h1>Pomodoro</h1>
-    <div class="centered-div">
-        <form method="post">
-            <div class="input-group mb-3">
-                <input class="form-group"name="minutes" type="number" value="25">
+    <div class="centralize">
+        <h1>Set your timer</h1>
+            <form method="post">
+            <div class="mb-3">
+                <label for=""minutes" class="form-label">Focus Time</label>
+                <input class="form-group" name="minutes" type="number" value="25">
             </div>
-            <div class="input-group mb-3">
-                <input name="break" type="number" value="10">
+            <div class="mb-3">
+                <label for="break" class="form-label">Break Time</label>
+                <input name="interval" type="number" value="5" class="form-group">
             </div>
             <div>
-                <input class="btn btn-primary" type="submit" value="Start">
+                <input class="btn btn-primary w-100" type="submit" value="Start">
             </div>
-        </form>
+            </form>
     </div>
-</body>
 {% endblock %}

@@ -6,11 +6,38 @@ Pomodoro Timer
 
 {% block content %}
 <div class="centralize">
-    <h1>Pomodoro Timer</h1>
-</div>
-<div class="centralize">
-    {{minutes}}
-    {{interval}}
+    <div >
+        <h1>Time left</h1>
+    </div>
+    <div>
+        <h1>{{ minutes }}</h1>
+    </div>
 </div>
 
+<script>
+    let f_seconds = document.getElementById("minutes") * 60;
+    let i_seconds = document.getElementById("interval") * 60;
+    let bigInter = document.getElementById("bigInter");
+    let blocks = document.getElementById("blocks");
+
+    function focus_time (DOMContentLoaded) {
+        if (f_seconds > 0 ){
+            let f_countingTime = (f_seconds - 1) / 60; // calculate the time left in minutes => ex: 123.45
+            let f_countingMin = Math.trunc(f_countingTime); // return the value of f-seconds into minutes (f-countingMin) => ex: Math.trunc(123.45) = 123
+            let f_countingSec = f_countingTime % 60; // Calculate te reminder of the f-seconds (this is, the seconds of the counter)   
+        } 
+        else if (blocks != 0) {
+            f_seconds = i_interval;
+            blocks--;
+        }
+        else {
+            f_seconds = bigInterval;
+        }
+        }
+
+        setInterval(focus_time, 1000);
+        
+    
+    setInterval 
+</script>
 {% endblock %}

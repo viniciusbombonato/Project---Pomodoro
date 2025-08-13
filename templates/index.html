@@ -13,15 +13,42 @@ Pomodoro Timer
         <h1>{{ minutes }}</h1>
     </div>
 </div>
+<!-- the clock desing bellow was made with AI help-->
+ <div class="centralize">
+    <h1>Time left</h1>
+    <svg width="200" height="200">
+        <circle
+            id="progress"
+            cx="100" cy="100" r="90"
+            stroke="tomato"
+            stroke-width="15"
+            fill="none"
+            stroke-dasharray="565.48"
+            stroke-dashoffset="0"
+        />
+    </svg>
+    <h1 id="timer">{{ minutes }}:00</h1>
+</div>
 
 <script>
     let f_seconds = document.getElementById("minutes") * 60;
     let i_seconds = document.getElementById("interval") * 60;
     let bigInter = document.getElementById("bigInter");
-    let blocks = document.getElementById("blocks");
+    let blocks = 4;
+
+    //SVG circle progress
+    const circle = document.getElementById("progress");
+    const radius = 90;
+    const circumference = 2 * Math.PI * radius;
+    circle.style.strokeDasharray = circumference;
+    circle.style.
+
+
+    //Timer function
+    const tiemrElement = document.getElementById("timer");
 
     function focus_time (DOMContentLoaded) {
-        if (f_seconds > 0 ){
+        if (f_seconds > 0 and blocks != 0) {
             let f_countingTime = (f_seconds - 1) / 60; // calculate the time left in minutes => ex: 123.45
             let f_countingMin = Math.trunc(f_countingTime); // return the value of f-seconds into minutes (f-countingMin) => ex: Math.trunc(123.45) = 123
             let f_countingSec = f_countingTime % 60; // Calculate te reminder of the f-seconds (this is, the seconds of the counter)   
@@ -32,6 +59,7 @@ Pomodoro Timer
         }
         else {
             f_seconds = bigInterval;
+            blocks = 4;
         }
         }
 

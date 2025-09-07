@@ -7,9 +7,9 @@
 {% block content %}
     <div class="centralize">
         <h1 class="margin">Set your timer</h1>
-            <form method="post">
+        <form method="post">
             <div class="mb-3">
-                <label for=""minutes" class="form-label">Focus Time</label>
+                <label for="minutes" class="form-label">Focus Time</label>
                 <input class="form-group" name="minutes" type="number" value="25" id="minutes">
             </div>
             <div class="mb-3">
@@ -18,11 +18,11 @@
             </div>
             <div class="mb-3">
                 <label for="bigInter" class="form-label">Big Interval</label>
-                <input name="bigIinter" type="number" value="10" class="form-group" id="interval">
+                <input name="bigInter" type="number" value="10" class="form-group" id="bigInter">
             </div>   
             <div>
                 <input class="btn btn-primary w-100" type="submit" value="Start">
             </div>
-            </form>
+        </form>
     </div>
 {% endblock %}

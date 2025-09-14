@@ -1,5 +1,7 @@
 class Timer {
     constructor(root) {
+        root.innerHTML = Timer.getHTML();
+        
         this.Element = {
             minutes: root.querySelector(".timer__part--minutes"),
             seconds: root.querySelector(".timer__part--seconds"),

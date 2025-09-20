@@ -1,7 +1,8 @@
 class Timer {
     constructor(root) {
+        this.root = root;
         root.innerHTML = Timer.getHTML();
-        
+
         this.Element = {
             minutes: root.querySelector(".timer__part--minutes"),
             seconds: root.querySelector(".timer__part--seconds"),
@@ -10,7 +11,15 @@ class Timer {
         };
 
         this.interval = null;
-        this.remainingSeconds = 0;
+        this.remainingSeconds = parseInt(this.root.dataset.minutes) * 60; // Use the data-minutes attribute
+        this.intervalTime = parseInt(this.root.dataset.interval) * 60;
+        this.bigIntervalTime = parseInt(this.root.dataset.bigInter) * 60;
+        this.focusTime = this.remainingSeconds;
+        this.breakTime = this.intervalTime;
+        this.bigBreakTime = this.bigIntervalTime;
+        this.isBreak = false;
+        this.isBigBreak = false;
+        this.sessionCount = 0;
 
         this.Element.control.addEventListener("click", () => {
             if (this.interval === null) {
@@ -21,13 +30,9 @@ class Timer {
         });
 
         this.Element.reset.addEventListener("click", () => {
-            const inputMinutes = document.getElementById("minutes");
-
-            if (inputMinutes != null) {
-                this.stop();
-                this.remainingSeconds = inputMinutes.value * 60;
-                this.updateInterfaceTimer();
-            }
+            this.stop();
+            this.remainingSeconds = this.focusTime;
+            this.updateInterfaceTimer();
         });
 
         this.updateInterfaceTimer();
@@ -55,7 +60,10 @@ class Timer {
     }
 
     start() {
-        if (this.remainingSeconds === 0) return;
+        if (this.remainingSeconds === 0) {
+            this.startBreak();
+            return;
+        }
 
         this.interval = setInterval(() => {
             this.remainingSeconds--;
@@ -63,6 +71,14 @@ class Timer {
 
             if (this.remainingSeconds === 0) {
                 this.stop();
+                this.sessionCount++;
+                if (this.sessionCount % 4 === 0) {
+                    this.isBigBreak = true;
+                    this.startBigBreak();
+                } else {
+                    this.isBreak = true;
+                    this.startBreak();
+                }
             }
         }, 1000);
 
@@ -73,6 +89,20 @@ class Timer {
         clearInterval(this.interval);
         this.interval = null;
         this.updateInterfaceControls();
+    }
+
+    startBreak() {
+        this.remainingSeconds = this.breakTime;
+        this.updateInterfaceTimer();
+        alert("Time to rest!");
+        this.start();
+    }
+
+    startBigBreak() {
+        this.remainingSeconds = this.bigBreakTime;
+        this.updateInterfaceTimer();
+        alert("Congratulations, you have now a big interval to rest!");
+        this.start();
     }
 
     static getHTML() {
@@ -90,6 +120,5 @@ class Timer {
     }
 }
 
-new Timer(
-    document.querySelector(".timer")
-);
+const timerElement = document.querySelector(".timer");
+new Timer(timerElement);

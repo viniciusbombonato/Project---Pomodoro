@@ -5,7 +5,11 @@ Counting
 {% endblock %}
 
 {% block content %}
-<div class="timer"></div>
+<div class="timer"
+    data-minutes ="{{ minutes }}"
+    data-seconds ="{{ secons }}"
+    data-big-inter ="{{ bigInter }}">
+</div>
 
 <script src="{{ url_for('static', filename='Timer.js') }}?v=1"></script>
 {% endblock %}

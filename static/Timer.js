@@ -10,6 +10,12 @@ class Timer {
             reset: root.querySelector(".timer__btn--reset"),
         };
 
+        console.log("minutes element:", this.Element.minutes);
+        console.log("seconds element:", this.Element.seconds);
+        console.log("control element:", this.Element.control);
+        console.log("reset element:", this.Element.reset);
+
+
         this.interval = null;
         this.remainingSeconds = parseInt(this.root.dataset.minutes) * 60; // Use the data-minutes attribute
         this.intervalTime = parseInt(this.root.dataset.interval) * 60;
@@ -60,11 +66,6 @@ class Timer {
     }
 
     start() {
-        if (this.remainingSeconds === 0) {
-            this.startBreak();
-            return;
-        }
-
         this.interval = setInterval(() => {
             this.remainingSeconds--;
             this.updateInterfaceTimer();
@@ -72,7 +73,12 @@ class Timer {
             if (this.remainingSeconds === 0) {
                 this.stop();
                 this.sessionCount++;
-                if (this.sessionCount % 4 === 0) {
+                if (this.isBreak === true || this.isBigBreak === true) {
+                    this.isBreak = false;
+                    this.isBigBreak = false;
+                    this.startFocus();
+                }
+                else if (this.sessionCount % 4 === 0) {
                     this.isBigBreak = true;
                     this.startBigBreak();
                 } else {
@@ -91,25 +97,41 @@ class Timer {
         this.updateInterfaceControls();
     }
 
+    startFocus(){
+        this.remainingSeconds = this.focusTime;
+        console.log("focusTime:", this.focusTime);
+        this.playSound();
+        alert("Time to focus!")
+        this.updateInterfaceTimer();
+        this.start();
+    }
+
     startBreak() {
         this.remainingSeconds = this.breakTime;
+        console.log("breakTime:", this.breakTime);
+        this.playSound();
         this.updateInterfaceTimer();
-        this.playsound();
         alert("Time to rest!");
         this.start();
     }
 
     startBigBreak() {
         this.remainingSeconds = this.bigBreakTime;
+        console.log("bigInterval:", this.bigIntervalTime);
         this.updateInterfaceTimer();
-        this.playsound();
+        this.playSound();
         alert("Congratulations, you have now a big interval to rest!");
         this.start();
     }
 
+    playSound(){
+        const sound = document.getElementById("timer-end-sound")
+        sound.play()
+    }
+
     static getHTML() {
         return `
-             <audio id="timer-end-sound" src="static/sound.mp3" preload="auto"></audio>
+            <audio id="timer-end-sound" src="static/sound.mp3" preload="auto"></audio>
             <span class="timer__part timer__part--minutes">00</span>
             <span class="timer__part">:</span>
             <span class="timer__part timer__part--seconds">00</span>

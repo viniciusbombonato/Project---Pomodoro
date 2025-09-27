@@ -6,6 +6,71 @@
   height: 100vh;
 }
 
-.margin {
-  margin-bottom: 20px;
+h1 {
+  color: white;
+  padding-bottom: 2vh;
+}
+
+label {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #00b84c; 
+  border-color: #00b84c; 
+}
+
+
+body {
+  height: 100vh;
+  background: linear-gradient(45deg, #D9078F, #D907A1, #4F30BF, #0AADBF, #0BD9D9);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.timer {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: row;
+  padding: 24px 32px;
+  color: white;
+}
+
+.timer__part {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+}
+
+.timer__btn {
+  width: 50px;
+  height: 50px;
+  margin-left: 16px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  background: #8208e6;
+  cursor: pointer;
+}
+
+.timer__btn--start {
+  background: #00b84c;
+}
+
+.timer__btn--stop {
+  background: #ff0256;
 }

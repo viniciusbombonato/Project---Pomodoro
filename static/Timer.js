@@ -94,6 +94,7 @@ class Timer {
     startBreak() {
         this.remainingSeconds = this.breakTime;
         this.updateInterfaceTimer();
+        this.playsound();
         alert("Time to rest!");
         this.start();
     }
@@ -101,12 +102,14 @@ class Timer {
     startBigBreak() {
         this.remainingSeconds = this.bigBreakTime;
         this.updateInterfaceTimer();
+        this.playsound();
         alert("Congratulations, you have now a big interval to rest!");
         this.start();
     }
 
     static getHTML() {
         return `
+             <audio id="timer-end-sound" src="static/sound.mp3" preload="auto"></audio>
             <span class="timer__part timer__part--minutes">00</span>
             <span class="timer__part">:</span>
             <span class="timer__part timer__part--seconds">00</span>
@@ -114,7 +117,7 @@ class Timer {
                 <span class="material-icons">play_arrow</span>
             </button>
             <button type="button" class="timer__btn timer__btn--reset">
-                <span class="material-icons">timer</span>
+                <span class="material-icons">replay</span>
             </button>
         `;
     }

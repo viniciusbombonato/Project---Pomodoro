@@ -3,33 +3,37 @@ class Timer {
         this.root = root;
         root.innerHTML = Timer.getHTML();
 
+        // Define the elements used by the Timer
         this.Element = {
             minutes: root.querySelector(".timer__part--minutes"),
             seconds: root.querySelector(".timer__part--seconds"),
             control: root.querySelector(".timer__btn--control"),
-            reset: root.querySelector(".timer__btn--reset"),
+            reset: root.querySelector(".timer__btn--reset"), 
         };
 
         console.log("minutes element:", this.Element.minutes);
         console.log("seconds element:", this.Element.seconds);
         console.log("control element:", this.Element.control);
-        console.log("reset element:", this.Element.reset);
+        console.log("reset element:", this.Element.reset);  // making sure that the elements exist
 
 
         this.interval = null;
-        this.remainingSeconds = parseInt(this.root.dataset.minutes) * 60; // Use the data-minutes attribute
+        // Convert user input values to seconds for timer logic
+        this.remainingSeconds = parseInt(this.root.dataset.minutes) * 60; 
         this.intervalTime = parseInt(this.root.dataset.interval) * 60;
         this.bigIntervalTime = parseInt(this.root.dataset.bigInter) * 60;
         this.focusTime = this.remainingSeconds;
         this.breakTime = this.intervalTime;
-        this.bigBreakTime = this.bigIntervalTime;
+        this.bigBreakTime = this.bigIntervalTime; //defining the 3 diferent times that the user chose
         this.isBreak = false;
         this.isBigBreak = false;
         this.sessionCount = 0;
 
+        // Set up event listeners for control and reset buttons
         this.Element.control.addEventListener("click", () => {
             if (this.interval === null) {
                 this.start();
+                this.playSound();
             } else {
                 this.stop();
             }
@@ -49,7 +53,7 @@ class Timer {
         const minutes = Math.floor(this.remainingSeconds / 60);
         const seconds = this.remainingSeconds % 60;
 
-        this.Element.minutes.textContent = minutes.toString().padStart(2, "0");
+        this.Element.minutes.textContent = minutes.toString().padStart(2, "0"); //update the user interface and make sure that the minutes and second have 2 digits each, otherwise includs a 0 before
         this.Element.seconds.textContent = seconds.toString().padStart(2, "0");
     }
 
@@ -61,7 +65,7 @@ class Timer {
         } else {
             this.Element.control.innerHTML = `<span class="material-icons">pause</span>`;
             this.Element.control.classList.add("timer__btn--stop");
-            this.Element.control.classList.remove("timer__btn--start");
+            this.Element.control.classList.remove("timer__btn--start"); // update the buttons that the user clicked
         }
     }
 
@@ -86,7 +90,7 @@ class Timer {
                     this.startBreak();
                 }
             }
-        }, 1000);
+        }, 1000); // pomodoro logic - if there is still time o the clock just subtract 1 to the remainingSeconds and update the interface otherwise start a break time or a bigBreak
 
         this.updateInterfaceControls();
     }
@@ -94,7 +98,7 @@ class Timer {
     stop() {
         clearInterval(this.interval);
         this.interval = null;
-        this.updateInterfaceControls();
+        this.updateInterfaceControls(); //stop the timer
     }
 
     startFocus(){
@@ -103,8 +107,8 @@ class Timer {
         this.playSound();
         alert("Time to focus!")
         this.updateInterfaceTimer();
-        this.start();
-    }
+        this.start(); 
+    }//when the focus time begings
 
     startBreak() {
         this.remainingSeconds = this.breakTime;
@@ -112,8 +116,8 @@ class Timer {
         this.playSound();
         this.updateInterfaceTimer();
         alert("Time to rest!");
-        this.start();
-    }
+        this.start(); 
+    } //set the break time
 
     startBigBreak() {
         this.remainingSeconds = this.bigBreakTime;
@@ -122,12 +126,12 @@ class Timer {
         this.playSound();
         alert("Congratulations, you have now a big interval to rest!");
         this.start();
-    }
+    } // set the big Break
 
     playSound(){
         const sound = document.getElementById("timer-end-sound")
         sound.play()
-    }
+    } //define what is the sound to play
 
     static getHTML() {
         return `
@@ -143,7 +147,7 @@ class Timer {
             </button>
         `;
     }
-}
+} // html that it will change each second and interaction
 
 const timerElement = document.querySelector(".timer");
 new Timer(timerElement);

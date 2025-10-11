@@ -1,6 +1,6 @@
 # Pomodoro Timer
 
-#### Video Demo:  <URL HERE>
+#### Video Demo:  
 
 #### Description:
 This is a simple Pomodoro Timer web app to help you stay focused and productive. With this app, you can set how long you want to work, how long your short breaks should be, and even customize your longer breaks after a few sessions. 

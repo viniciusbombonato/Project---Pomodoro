@@ -11,24 +11,24 @@ def homepage():
         interval = request.form.get("interval") 
         bigInter = request.form.get("bigInter") 
 
-        app.logger.info("Values acquired")
+        app.logger.info("Values acquired") #checking interaction
 
         if minutes and interval and bigInter and minutes.isdigit() and interval.isdigit() and bigInter.isdigit():
             minutes = int(minutes)
             interval = int(interval)
             bigInter = int(bigInter)
 
-            app.logger.info("values converted")
+            app.logger.info("values converted") #checking interaction
 
             if 60 > minutes > 0 and 60 > interval > 0 and 60 > bigInter > 0:
                 app.logger.info("Valadition succeded")
                 return render_template("index.html", minutes=minutes, interval=interval, bigInter=bigInter)
 
             else:
-                app.logger.warning("validation failed")
+                app.logger.warning("validation failed") #warning
                 return render_template("home.html")
         else:
-            app.logger.warning("Failed to convert")
+            app.logger.warning("Failed to convert") #warning
             return render_template("home.html")
     else:
         return render_template("home.html")

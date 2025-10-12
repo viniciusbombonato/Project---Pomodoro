@@ -1,3 +1,4 @@
+// This project was developed with the assistance of AI tools, including GitHub Copilot.
 class Timer {
     constructor(root) {
         this.root = root;

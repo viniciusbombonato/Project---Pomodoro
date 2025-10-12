@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import logging
 import os
 
+# This project was developed with the assistance of AI tools, including GitHub Copilot.
 app = Flask(__name__)
 app.logger.setLevel(logging.INFO)
 
